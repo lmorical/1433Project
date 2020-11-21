@@ -83,7 +83,7 @@ generate climate_top = 1 if climate_1 == 1 | climate_2 ==1
 replace climate_top = 0 if climate_1 == 0 & climate_2 == 0
 
 **positive feelings toward greens**
-drop if v12 == 99
+
 generate like_greens = 1 if v12 > 6
 replace like_greens = 0 if v12 <=6
 
@@ -136,6 +136,8 @@ eststo: quietly regress climate_top evfuture_ i.state i.v4 i.v60 i.v57 i.v56 i.v
 eststo: quietly regress climate_top evfuture_ i.state i.v4 i.v60 i.v57 i.v56 i.v52 i.v54 if v61 == 1 [weight = v78], cluster(state)
 
 **like greens on produce EVs**
+drop if v12 == 99
+
 eststo: quietly regress like_greens produce_ev i.state i.v4 [weight = v78], cluster(state)
 eststo: quietly regress like_greens produce_ev i.state i.v4 i.v60 i.v57 i.v56 i.v52 i.v54 [weight = v78], cluster(state)
 eststo: quietly regress like_greens produce_ev i.state i.v4 i.v60 i.v57 i.v56 i.v52 i.v54 if v61 == 1 [weight = v78], cluster(state)
